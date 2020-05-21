@@ -10,12 +10,12 @@ public interface BookService {
 	
 	List<Book> findAllData();//全書籍の大まかな情報を持つ
 	
-	Optional<Book> findDetailsById(int id);//指定したidの詳細情報を持つ
+	Optional<BookAll> findDetailsById(int id);//指定したidの詳細情報を持つ
 	
 	void insert(BookAll book);
 	
-	int update(BookAll book);
+	void update(BookAll book);
 	
-	int deleteById(int id);
+	void deleteById(int id);
 
 }

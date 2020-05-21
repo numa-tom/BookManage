@@ -18,21 +18,99 @@
 
   <body>
 
-	<div th:replace="~{block/header::headerA}"></div>
-    <main role="main" class="container">
+<div th:replace="~{block/header::headerA}"></div>
+<main role="main" class="container">
 
       <div class="starter-template">
         <h1 th:text="${title}">Bootstrap starter template</h1>
-        <p class="lead">入力が正しいか確認し、必要であれば修正してください。<br> 問題がなければ登録してください。</p>
+        <p class="lead">選択した書籍の詳細です。</p>
       </div>
+<div th:object="${bookForm}">
 
-<form method="get" action="#" th:action="@{/book/index}">
-	<button type="submit" class="btn btn-primary">戻る</button>
+<div class="mb-5">
+
+<ul class="list-group">
+  
+  <li @class="list-group-item">書籍名
+    <p th:text="*{name}">Dapibus ac facilisis in</p>
+  </li>
+  
+  <li @class="list-group-item">ジャンル
+    <p th:text="*{type}">Morbi leo risus</p>
+  </li>
+  
+  <li @class="list-group-item">出版社
+    <p th:text="*{publisher}">Morbi leo risus</p>
+  </li>
+  
+  <li @class="list-group-item">著者
+    <p th:text="*{writer}"></p>
+  </li>
+  
+  <li @class="list-group-item">料金
+    <p th:text="*{charge}"></p>
+  </li>
+  
+  <li @class="list-group-item">ページ数
+  <p th:text="*{pageNumber}"></p>
+  </li>
+  
+  <li @class="list-group-item">保管場所
+  <p th:text="*{place}"></p>
+  </li>
+  
+  <li @class="list-group-item">コメント
+  <p th:text="*{comment}">Porta ac consectetur ac</p>
+  </li>
+ 
+</ul>
+ 
+
+<!--<form method="post" action="#" th:action="@{/book/register}">
+	<input type="hidden" name="name" th:value="*{name}">
+	<input type="hidden" name="type" th:value="*{type}">
+	<input type="hidden" name="publisher" th:value="*{publisher}">
+	<input type="hidden" name="writer" th:value="*{writer}">
+	<input type="hidden" name="charge" th:value="*{charge}">
+	<input type="hidden" name="pageNumber" th:value="*{pageNumber}">
+	<input type="hidden" name="place" th:value="*{place}">
+	<input type="hidden" name="comment" th:value="*{comment}">
+	<button type="submit" class="btn btn-primary">修正</button>
 </form>
-<form method="post" action="#">
-	<button type="submit" class="btn btn-primary">編集</button>
+
+<form method="post" action="#" th:action="@{/book/update}">
+	<input type="hidden" name="name" th:value="*{name}">
+	<input type="hidden" name="type" th:value="*{type}">
+	<input type="hidden" name="publisher" th:value="*{publisher}">
+	<input type="hidden" name="writer" th:value="*{writer}">
+	<input type="hidden" name="charge" th:value="*{charge}">
+	<input type="hidden" name="pageNumber" th:value="*{pageNumber}">
+	<input type="hidden" name="place" th:value="*{place}">
+	<input type="hidden" name="comment" th:value="*{comment}">
+	<button type="submit" class="btn btn-primary">登録</button>
+</form>
+-->
+    
+      
+
+<form method="post" action="#" th:action="@{/book/updateRegister}">
+	<input type="hidden" name="bookId" th:value="${bookId}">
+	<input type="hidden" name="name" th:value="*{name}">
+	<input type="hidden" name="type" th:value="*{type}">
+	<input type="hidden" name="publisher" th:value="*{publisher}">
+	<input type="hidden" name="writer" th:value="*{writer}">
+	<input type="hidden" name="charge" th:value="*{charge}">
+	<input type="hidden" name="pageNumber" th:value="*{pageNumber}">
+	<input type="hidden" name="place" th:value="*{place}">
+	<input type="hidden" name="comment" th:value="*{comment}">
+	<button type="submit" class="btn btn-primary">修正 &raquo</button>
+</form>
+<form method="get" action="#" th:action="@{/book/index}">
+	<button type="submit" class="btn btn-secondary">戻る &laquo</button>
 </form>
 </div>
+</div> 
+
 
     </main><!-- /.container -->
 

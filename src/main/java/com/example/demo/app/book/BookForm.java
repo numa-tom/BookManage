@@ -4,34 +4,50 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class BookForm {
+	
+	//private int bookId;
+	
 	@NotNull(message="書籍名は？")
-	String name;
+	private String name;
 	
 	@NotNull(message="ジャンルは？")
-	String type;
+	private String type;
 	
 	@NotNull(message="誰が書いた？")
-	String publisher;
+	private String publisher;
 	
 	
 	@NotNull
-	String writer;
+	private String writer;
 	
 	@NotNull
-	int charge;
+	private int charge;
 	
 	@NotNull
 	@Min(1)
-	int pageNumber;
+	private int pageNumber;
 
 	@NotNull
-	String place;
+	private String place;
 	
-	String comment;
+	private String comment;
+	
+	public boolean isNewBook;
 
 
 	public BookForm() {
 	}
+
+
+//	public int getBookId() {
+//		return bookId;
+//	}
+//
+//
+//	public void setBookId(int bookId) {
+//		this.bookId = bookId;
+//	}
+//
 
 
 	public String getName() {
@@ -113,6 +129,16 @@ public class BookForm {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
+	public boolean isNewBook() {
+		return isNewBook;
+	}
+
+
+	public void setNewBook(boolean isNewBook) {
+		this.isNewBook = isNewBook;
+	}
+
 
 
 	

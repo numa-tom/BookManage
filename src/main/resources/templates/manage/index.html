@@ -53,10 +53,15 @@
     <div class="container">
       <h1 class="display-3" th:text="${title}">Hello, world!</h1>
       <p>本サイトは一人一人の本棚を管理できるサービスです。<br>あの本どこいったっけな、この本はここに置こう、といったときに使えます。管理と検索を主にできるため、本の居場所がすぐにわかります。</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">使い方 &raquo;</a></p>
+      <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">使い方 &raquo;</a></p> -->
     </div>
     <div th:unless="${#strings.isEmpty(complete)}">
 		<div th:text="${complete}" class="alert alert-success" role="alert">
+		  A simple success alert?check it out! 
+		</div>
+	</div>
+	<div th:unless="${#strings.isEmpty(error)}">
+		<div th:text="${error}" class="alert alert-danger" role="alert">
 		  A simple success alert?check it out! 
 		</div>
 	</div>
@@ -67,11 +72,28 @@
     <!-- Example row of columns -->
     <form th:each="obj : ${list}">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" style="margin-bottom:20pt">
+      	<!-- <h2 th:text="${obj.getId()}"></h2>  -->
         <h2 th:text="${obj.getName()}">例：名前</h2>
-        <p>ジャンル：<a th:text="${obj.getType()}">IT</a></P>
-        <p>配置場所：<a th:text="${obj.getPlace()}">右下</a></P>
-        <p><a class="btn btn-secondary" href="#" role="button" th:href="@{/book/details}">詳細 &raquo;</a></p>
+        <p>ジャンル：<a th:text="${obj.getType()}">ジャンル</a></P>
+        <p>配置場所：<a th:text="${obj.getPlace()}">場所</a></P>
+        <div style="float:left; margin-right:20px">
+        	<!-- <form method="get" action="#" th:action="@{/book/details/{id}(id=${obj.id})}">
+	        	
+	        	<input type="hidden" name="bookId" th:value="${obj.id}">
+    	    	<button type="submit" class="btn btn-success" th:href="@{/book/details/{id}(id=${obj.id})}"><a>詳細 &raquo</a></button>
+ 			  
+        	</form>	-->
+        	<a type="button" class="btn btn-success" th:href="@{/book/details/{id}(id=${obj.id})}">詳細 &raquo</a>
+        </div>
+        <div style="float:left;">
+        	<form method="post" action="#" th:action="@{/book/delete}">
+				<!-- <input type="hidden" name="bookId" th:value="${obj.getId()}">  -->
+				<button type="submit" class="btn btn-danger">削除 &laquo</button>
+        	</form>
+        </div>
+        <!-- <p><a class="btn btn-secondary" href="#" role="button" name="bookId" th:value="${obj.id}" th:href="${/book/details}">詳細 &raquo;</a></p>
+	 -->
       </div>
     </div>
     </form>
