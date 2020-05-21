@@ -42,46 +42,52 @@ public class BookDaoImpl implements BookDao {
 	}
 	
 	@Override
-	public Optional<Book> findDetailsById(int id){
+	public Optional<BookAll> findDetailsById(int id){
 		
-		String sql = "SELECT id, name, type, place "
-					+"FROM book where id == ?";
+		String sql = "SELECT id, name, type, place, publisher, writer, charge, pageNumber, comment "
+					+"FROM book WHERE id = ?";
 		
-		Map<String, Object> result = jdbcTemplate.queryForMap(sql);
+		Map<String, Object> result = jdbcTemplate.queryForMap(sql, id);
 		
+		//プライベートメソッドにして楽にする
+		//BookAll bookAll = makeBookAll(result)とか
 		Book book = new Book();
+		BookAll bookAll = new BookAll();
+		
 		book.setId((int)result.get("id"));
 		book.setName((String)result.get("name"));
 		book.setType((String)result.get("type"));
-//		book.setWriter((String)result.get("writer"));
-//		book.setPublisher((String)result.get("publisher"));
-//		book.setPageNumber((int)result.get("pageNumber"));
-//		book.setCharge((int)result.get("charge"));
 		book.setPlace((String)result.get("place"));
-//		book.setComment((String)result.get("comment"));
 		
-		Optional<Book> bookOpt = Optional.ofNullable(book);
+		bookAll.setBook(book);
+		bookAll.setWriter((String)result.get("writer"));
+		bookAll.setPublisher((String)result.get("publisher"));
+		bookAll.setPageNumber((int)result.get("pageNumber"));
+		bookAll.setCharge((int)result.get("charge"));
+		bookAll.setComment((String)result.get("comment"));
+		
+		Optional<BookAll> bookOpt = Optional.ofNullable(bookAll);
 		
 		return bookOpt;
 	}
 
 	@Override
 	public void insert(BookAll book) {
-		String sql = "INSERT INTO book(name, type, writer, publisher, pageNumber, charge, place, comment) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO book( name, type, writer, publisher, pageNumber, charge, place, comment) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, book.getBook().getName(), book.getBook().getType(), book.getWriter(), book.getPublisher(), book.getPageNumber(),
 				book.getCharge(), book.getBook().getPlace(), book.getComment());
 	}
 
 	@Override
 	public int update(BookAll book) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "UPDATE book SET name=?, type=?, writer=?, publisher=?, pageNumber=?, charge=?, place=?, comment=? WHERE id = ?";
+		return jdbcTemplate.update(sql, book.getBook().getName(), book.getBook().getType(), book.getWriter(), book.getPublisher(),
+				book.getPageNumber(), book.getCharge(), book.getBook().getPlace(), book.getComment(),book.getBook().getId());
 	}
 
 	@Override
 	public int deleteById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return jdbcTemplate.update("DELETE FROM book WHERE id = ?", id);
 	}
 
 }

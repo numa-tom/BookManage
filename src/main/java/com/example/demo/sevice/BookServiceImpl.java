@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public Optional<Book> findDetailsById(int id){
+	public Optional<BookAll> findDetailsById(int id){
 		try {
 			return dao.findDetailsById(id);
 		}catch(EmptyResultDataAccessException e) {
@@ -41,15 +41,17 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public int update(BookAll book) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void update(BookAll book) {
+		if(dao.update(book)==0) {
+			throw new BookNotFoundException("更新する本情報がありません");
+		}
 	}
 
 	@Override
-	public int deleteById(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void deleteById(int id) {
+		if(dao.deleteById(id)==0) {
+			throw new BookNotFoundException("削除する本情報が見当たりません");
+		}
 	}
 
 }

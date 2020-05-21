@@ -34,7 +34,7 @@
 	 -->
 	
 	
-	<form method="post" action="#" th:action="@{/book/confirm}" th:object="${bookForm}">
+	<form method="post" action="#" th:action="${bookForm.isNewBook}? @{/book/confirm} : @{/book/update}"  th:object="${bookForm}">
 	  <div class="form-group">
 	  <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
 	    <label for="name">名前</label>
@@ -82,9 +82,14 @@
 	    <label for="comment">コメント</label>
 	    <textarea  name="comment" class="form-control" id="comment" rows="3" th:field="*{comment}"></textarea>
 	  </div>
-	  <div class="text-danger mb-4" ></div>
-	  <button type="submit" class="btn btn-primary">確認</button>
+	  <div class="text-danger mb-4">
+	  <input th:if="${bookId}" type="hidden" name="bookId" th:value="${bookId}">
+	  <button type="submit" class="btn btn-primary">登録 &raquo</button>
+	  </div>
 	</form>
+	<div style="margin-top:10pts">
+		<a type="button" class="btn btn-secondary" th:href="@{/book/index}">戻る &laquo</a>
+    </div>
     </main><!-- /.container -->
 <div th:replace="~{block/footer::footerA}"></div>
     <!-- Bootstrap core JavaScript

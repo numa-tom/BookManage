@@ -9,7 +9,7 @@ import com.example.demo.entity.BookAll;
 public interface BookDao {
 	List<Book> findAllData();
 	
-	Optional<Book> findDetailsById(int id);
+	Optional<BookAll> findDetailsById(int id);
 	
 	void insert(BookAll book);
 	
