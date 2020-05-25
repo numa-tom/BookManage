@@ -60,10 +60,12 @@ public class BookController {
 	}
 	
 	@PostMapping("/updateRegister")
-	public String updateRegister(BookForm bookForm, Model model) {
+	public String updateRegister(BookForm bookForm,@RequestParam("bookId") int bookId , 
+			Model model) {
 		bookForm.setNewBook(false);
 		model.addAttribute("title", "内容変更画面");
 		model.addAttribute("bookForm", bookForm);
+		model.addAttribute("bookId", bookId);
 		return "manage/bookRegister";
 	}
 	
