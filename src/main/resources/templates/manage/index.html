@@ -70,7 +70,7 @@
 
   <div class="container">
     <!-- Example row of columns -->
-    <form th:each="obj : ${list}">
+    <tr th:each="obj : ${list}">
     <div class="row">
       <div class="col-md-12" style="margin-bottom:20pt">
       	<!-- <h2 th:text="${obj.getId()}"></h2>  -->
@@ -87,8 +87,8 @@
         	<a type="button" class="btn btn-success" th:href="@{/book/details/{id}(id=${obj.id})}">詳細 &raquo</a>
         </div>
         <div style="float:left;">
-        	<form method="post" action="#" th:action="@{/book/delete}">
-				<!-- <input type="hidden" name="bookId" th:value="${obj.getId()}">  -->
+        	<form method="POST" th:action="@{/book/delete}">
+				<input type="hidden" name="bookId" th:value="${obj.id}">
 				<button type="submit" class="btn btn-danger">削除 &laquo</button>
         	</form>
         </div>
@@ -96,7 +96,7 @@
 	 -->
       </div>
     </div>
-    </form>
+    </tr>
 
     <hr>
 
